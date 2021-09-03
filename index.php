@@ -7,9 +7,9 @@
   <body>
     <?php
     // Tilkoblingsinformasjon
-      $tjener = "localhost";
-      $brukernavn = "root";
-      $passord = "root";
+      $tjener = "steinang.mysql.database.azure.com";
+      $brukernavn = "steinang";
+      $passord = "247jeykS";
       $database = "Bibliotek"; //Endre på denne til din database
 
       // Opprette en kobling
@@ -19,7 +19,7 @@
       if($kobling->connect_error) {
           die("Noe gikk galt: " . $kobling->connect_error);
       } else {
-          //echo "Koblingen virker.<br>";
+          echo "Koblingen virker.<br>";
       }
 
       // Angi UTF-8 som tegnsett
