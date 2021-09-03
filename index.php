@@ -6,6 +6,7 @@
   </head>
   <body>
     <?php
+    echo "kom hit";
       // PHP Data Objects(PDO) Sample Code:
       try {
           $conn = new PDO("sqlsrv:server = tcp:steinang.database.windows.net,1433; Database = Bibliotek", "steinang", "{your_password_here}");
