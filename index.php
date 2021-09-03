@@ -2,22 +2,40 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Enkel php app</title>
+    <title></title>
   </head>
   <body>
     <?php
-    echo "kom hit";
-      // PHP Data Objects(PDO) Sample Code:
-      try {
-          $con = mysqli_init(); 
-          mysqli_ssl_set($con,NULL,NULL, "{path to CA cert}", NULL, NULL); 
-          mysqli_real_connect($conn, "steinang.mysql.database.azure.com", "steinang", "247jeykS", "", 3306, MYSQLI_CLIENT_SSL);
-          $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    // Tilkoblingsinformasjon
+      $tjener = "localhost";
+      $brukernavn = "root";
+      $passord = "root";
+      $database = "Bibliotek"; //Endre på denne til din database
+
+      // Opprette en kobling
+      $kobling = new mysqli($tjener, $brukernavn, $passord, $database);
+
+      // Sjekk om koblingen virker
+      if($kobling->connect_error) {
+          die("Noe gikk galt: " . $kobling->connect_error);
+      } else {
+          //echo "Koblingen virker.<br>";
       }
-      catch (PDOException $e) {
-          print("Error connecting to SQL Server.");
-          die(print_r($e));
+
+      // Angi UTF-8 som tegnsett
+      $kobling->set_charset("utf8");
+      // Med linjeskift for 1 tabell
+      $sql = "SELECT * FROM Bok"; //Skriv din sql kode her
+      $resultat = $kobling->query($sql);
+
+      echo "<ol>";
+      while($rad = $resultat->fetch_assoc()) {
+        $tittel = $rad["tittel"]; //Skriv ditt kolonnenavn her
+        $isbn = $rad["ISBN"];
+
+        echo "<li>$tittel : $isbn </li>";
       }
+      echo "</ol>";
     ?>
   </body>
 </html>
